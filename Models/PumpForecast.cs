@@ -8,7 +8,7 @@ namespace EF_Tutorial.Models
     public class PumpForecast
     {
         public int PumpForecastId { get; set; }
-        public int PumpForecastData { get; set; }
+        public List<int> PumpForecastData { get; set; }
         public Pump Pump { get; set; }
     }
 }
