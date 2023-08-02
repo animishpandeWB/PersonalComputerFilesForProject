@@ -7,14 +7,11 @@ namespace EF_Tutorial.Models
 {
     public class Pump
     {
-        public int PumpId { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public bool Status { get; set; }
         public int UserId { get; set; }
-        public string PumpName { get; set; }
-        public string PumpType { get; set; }
-        public DateTime PumpTime { get; set; }
-        public bool PumpStatus { get; set; }
-        // public List<int> PumpForecast { get; set; }
-        // public ICollection<PumpForecast> PumpForecasts { get; set; } = new List<PumpForecast>();
-        public User User { get; set; } = null!;
+        public User? User { get; set; }
     }
 }

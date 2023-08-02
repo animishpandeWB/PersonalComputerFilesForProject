@@ -9,5 +9,8 @@ namespace EF_Tutorial.Interface
     public interface IUser
     {
         ICollection<User> GetUsers();
+        User GetUserById(int id);
+        User CreateUser(User user);
+        bool UserExists(int userId);
     }
 }

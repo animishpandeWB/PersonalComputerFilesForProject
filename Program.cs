@@ -4,6 +4,8 @@ using EF_Tutorial.Interface;
 using EF_Tutorial.Repository;
 using Microsoft.EntityFrameworkCore;
 
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // builder.Services.AddTransient<Seed>();
 builder.Services.AddScoped<IUser, UserRepository>();
+builder.Services.AddScoped<IPump, PumpRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -19,10 +22,21 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-var app = builder.Build();
 
-// if (args.Length == 1 && args[0].ToLower() == "seeddata")
-//     SeedData(app);
+var app = builder.Build();
+// using var scope = app.Services.CreateScope();
+// var services = scope.ServiceProvider;
+
+// try {
+//     var context = services.GetRequiredService<DataContext>();
+//     await context.Database.MigrateAsync();
+//     await Seed.SeedDataContext(context);
+// }
+// catch (Exception ex) {
+//     var logger = services.GetRequiredService<ILogger<Program>>();
+// }
+
+// SeedData(app);
 
 // void SeedData(IHost app)
 // {
@@ -30,7 +44,9 @@ var app = builder.Build();
 
 //     using (var scope = scopedFactory.CreateScope())
 //     {
-//         var service = scope.ServiceProvider.GetService<Seed>();
+//         var service = scope.ServiceProvider.GetService<Seed>();\
+
+        
 //         service.SeedDataContext();
 //     }
 // }
@@ -43,6 +59,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

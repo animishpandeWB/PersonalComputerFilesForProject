@@ -28,5 +28,37 @@ namespace EF_Tutorial.Controllers
 
             return Ok(users);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetUsersById(int id)
+        {
+            var user = _userInterface.GetUserById(id);
+             if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            return Ok(user);
+        }
+
+        [HttpPost]
+        public IActionResult CreateUser(User userCreate)
+        {
+            if(userCreate == null)
+            {
+                return BadRequest(ModelState);
+            }
+            if(_userInterface.UserExists(userCreate.Id) != null) 
+            {
+                ModelState.AddModelError("", "Owner already exists");
+                return StatusCode(422, ModelState);
+            }
+            userCreate = _userInterface.CreateUser(userCreate);
+            // var response = Request.CreateResponse<User>(HttpStatusCode.Created, userCreate);
+            // if(!_userInterface.CreateUser(userCreate)) 
+            // {
+            //     ModelState.AddModelError("", "Something went wrong while saving");
+            //     return StatusCode(500, ModelState);
+            // }
+            return Ok("User successfully created");
+        }
     }
 }
