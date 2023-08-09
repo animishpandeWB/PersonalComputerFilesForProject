@@ -7,7 +7,11 @@ namespace EF_Tutorial.Models
 {
     public class User
     {
-        public int Id { get; set; }
+        // int _userId = 1;
+        
+        
+        // [Key]
+        public int UserId { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }

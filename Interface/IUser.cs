@@ -10,7 +10,8 @@ namespace EF_Tutorial.Interface
     {
         ICollection<User> GetUsers();
         User GetUserById(int id);
-        User CreateUser(User user);
+        bool CreateUser(User user);
         bool UserExists(int userId);
+        bool Save();
     }
 }

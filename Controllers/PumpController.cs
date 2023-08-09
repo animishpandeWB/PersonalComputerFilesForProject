@@ -29,7 +29,7 @@ namespace EF_Tutorial.Controllers
             return Ok(pumps);
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("users/{userId}")]
         public IActionResult GetPumpsByUserId(int userId)
         {
             var pumps = _pumpRepository.GetPumpByUserId(userId);
@@ -37,6 +37,53 @@ namespace EF_Tutorial.Controllers
                 return BadRequest("No pumps available");
             }
             return Ok(pumps);
+        }
+
+        [HttpGet("{pumpId}")]
+        public IActionResult GetPumpsByPumpId(int pumpId)
+        {
+            var pumps = _pumpRepository.GetPumpByPumpId(pumpId);
+            if(pumps == null) {
+                return BadRequest("No pumps available");
+            }
+            return Ok(pumps);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult AddPump([FromBody] Pump pump) 
+        {
+            if(pump == null) 
+            {
+                return BadRequest("Pump is null");
+            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_pumpRepository.AddPump(pump))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            
+            return Ok("Pump successfully Added");
+        }
+
+        [HttpDelete("{pumpId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeletePump(int pumpId) 
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            if(!_pumpRepository.DeletePump(pumpId)) 
+            {
+                ModelState.AddModelError("", "Something went wrong deleting pump");
+            }
+            return Ok("Pump deleted successfully");
         }
     }
 }

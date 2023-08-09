@@ -10,5 +10,9 @@ namespace EF_Tutorial.Interface
     {
         ICollection<Pump> GetPumps();
         ICollection<Pump> GetPumpByUserId(int userId);
+        Pump GetPumpByPumpId(int pumpId);
+        bool AddPump(Pump pump);
+        bool DeletePump(int pumpId);
+        bool Save();
     }
 }

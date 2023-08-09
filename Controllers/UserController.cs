@@ -30,9 +30,15 @@ namespace EF_Tutorial.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(User))]
+        [ProducesResponseType(400)]
         public IActionResult GetUsersById(int id)
         {
+            if (!_userInterface.UserExists(id))
+                return NotFound();
+
             var user = _userInterface.GetUserById(id);
+
              if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -40,24 +46,31 @@ namespace EF_Tutorial.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateUser(User userCreate)
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateUser([FromBody] User userCreate)
         {
             if(userCreate == null)
             {
                 return BadRequest(ModelState);
             }
-            if(_userInterface.UserExists(userCreate.Id) != null) 
+
+            var userExistsCheck = _userInterface.GetUserById(userCreate.UserId);
+            if(userExistsCheck != null) 
             {
                 ModelState.AddModelError("", "Owner already exists");
                 return StatusCode(422, ModelState);
             }
-            userCreate = _userInterface.CreateUser(userCreate);
-            // var response = Request.CreateResponse<User>(HttpStatusCode.Created, userCreate);
-            // if(!_userInterface.CreateUser(userCreate)) 
-            // {
-            //     ModelState.AddModelError("", "Something went wrong while saving");
-            //     return StatusCode(500, ModelState);
-            // }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+           
+            // userCreate = _userInterface.CreateUser(userCreate);
+            if (!_userInterface.CreateUser(userCreate))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            
             return Ok("User successfully created");
         }
     }

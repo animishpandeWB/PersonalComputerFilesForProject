@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EF_Tutorial.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230802045405_SeedCreate")]
-    partial class SeedCreate
+    [Migration("20230808062441_InitialSeed")]
+    partial class InitialSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,11 @@ namespace EF_Tutorial.Migrations
 
             modelBuilder.Entity("EF_Tutorial.Models.Pump", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PumpId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PumpId"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -46,7 +46,7 @@ namespace EF_Tutorial.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("PumpId");
 
                     b.HasIndex("UserId");
 
@@ -55,7 +55,7 @@ namespace EF_Tutorial.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            PumpId = 1,
                             Name = "Pump 1",
                             Status = true,
                             Type = "Centrifugal Pump",
@@ -63,7 +63,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            PumpId = 2,
                             Name = "Pump 2",
                             Status = false,
                             Type = "Jet Pump",
@@ -71,7 +71,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            PumpId = 3,
                             Name = "Pump 3",
                             Status = false,
                             Type = "Piston Pump",
@@ -79,7 +79,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 4,
+                            PumpId = 4,
                             Name = "Pump 4",
                             Status = false,
                             Type = "Centrifugal Pump",
@@ -87,7 +87,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 5,
+                            PumpId = 5,
                             Name = "Pump 5",
                             Status = true,
                             Type = "Jet Pump",
@@ -95,7 +95,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 6,
+                            PumpId = 6,
                             Name = "Pump 6",
                             Status = true,
                             Type = "Jet Pump",
@@ -103,7 +103,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 7,
+                            PumpId = 7,
                             Name = "Pump 7",
                             Status = false,
                             Type = "Piston Pump",
@@ -111,7 +111,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 8,
+                            PumpId = 8,
                             Name = "Pump 8",
                             Status = true,
                             Type = "Piston Pump",
@@ -119,7 +119,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 9,
+                            PumpId = 9,
                             Name = "Pump 9",
                             Status = false,
                             Type = "Centrifugal Pump",
@@ -127,7 +127,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 10,
+                            PumpId = 10,
                             Name = "Pump 10",
                             Status = true,
                             Type = "Jet Pump",
@@ -135,7 +135,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 11,
+                            PumpId = 11,
                             Name = "Pump 11",
                             Status = false,
                             Type = "Jet Pump",
@@ -143,7 +143,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 12,
+                            PumpId = 12,
                             Name = "Pump 12",
                             Status = true,
                             Type = "Centrifugal Pump",
@@ -151,7 +151,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 13,
+                            PumpId = 13,
                             Name = "Pump 13",
                             Status = true,
                             Type = "Piston Pump",
@@ -159,7 +159,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 14,
+                            PumpId = 14,
                             Name = "Pump 14",
                             Status = false,
                             Type = "Piston Pump",
@@ -167,7 +167,7 @@ namespace EF_Tutorial.Migrations
                         },
                         new
                         {
-                            Id = 15,
+                            PumpId = 15,
                             Name = "Pump 15",
                             Status = true,
                             Type = "Centrifugal Pump",
@@ -175,13 +175,38 @@ namespace EF_Tutorial.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EF_Tutorial.Models.User", b =>
+            modelBuilder.Entity("EF_Tutorial.Models.PumpForecast", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Forecast")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PumpId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PumpId");
+
+                    b.ToTable("PumpForecast");
+                });
+
+            modelBuilder.Entity("EF_Tutorial.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -195,14 +220,14 @@ namespace EF_Tutorial.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            UserId = 1,
                             Email = "test1@123.com",
                             Password = "test1",
                             Username = "test1"
@@ -218,6 +243,22 @@ namespace EF_Tutorial.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EF_Tutorial.Models.PumpForecast", b =>
+                {
+                    b.HasOne("EF_Tutorial.Models.Pump", "Pump")
+                        .WithMany("PumpForecasts")
+                        .HasForeignKey("PumpId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Pump");
+                });
+
+            modelBuilder.Entity("EF_Tutorial.Models.Pump", b =>
+                {
+                    b.Navigation("PumpForecasts");
                 });
 
             modelBuilder.Entity("EF_Tutorial.Models.User", b =>

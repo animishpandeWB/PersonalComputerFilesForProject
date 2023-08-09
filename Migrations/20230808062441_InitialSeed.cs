@@ -7,7 +7,7 @@
 namespace EF_Tutorial.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedCreate : Migration
+    public partial class InitialSeed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +16,7 @@ namespace EF_Tutorial.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -24,14 +24,14 @@ namespace EF_Tutorial.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Pumps",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    PumpId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -40,23 +40,44 @@ namespace EF_Tutorial.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pumps", x => x.Id);
+                    table.PrimaryKey("PK_Pumps", x => x.PumpId);
                     table.ForeignKey(
                         name: "FK_Pumps_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PumpForecast",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Day = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Forecast = table.Column<int>(type: "int", nullable: false),
+                    PumpId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PumpForecast", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PumpForecast_Pumps_PumpId",
+                        column: x => x.PumpId,
+                        principalTable: "Pumps",
+                        principalColumn: "PumpId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Email", "Password", "Username" },
+                columns: new[] { "UserId", "Email", "Password", "Username" },
                 values: new object[] { 1, "test1@123.com", "test1", "test1" });
 
             migrationBuilder.InsertData(
                 table: "Pumps",
-                columns: new[] { "Id", "Name", "Status", "Type", "UserId" },
+                columns: new[] { "PumpId", "Name", "Status", "Type", "UserId" },
                 values: new object[,]
                 {
                     { 1, "Pump 1", true, "Centrifugal Pump", 1 },
@@ -77,6 +98,11 @@ namespace EF_Tutorial.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_PumpForecast_PumpId",
+                table: "PumpForecast",
+                column: "PumpId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pumps_UserId",
                 table: "Pumps",
                 column: "UserId");
@@ -85,6 +111,9 @@ namespace EF_Tutorial.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "PumpForecast");
+
             migrationBuilder.DropTable(
                 name: "Pumps");
 
