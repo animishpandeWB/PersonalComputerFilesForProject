@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "XRzFc6GnigPX9c3BnM9Z6LIzs0N3kMVF6cGJxmuO6Q4ODvU0nqbYaTIETlRLB6yl06m4bEeIyTcuqAljD0HzWQ==",
+  "dgSpecHash": "jvLlSwOnHv+VZELnkO4cGZjwtOfT0WWqgoK5u5dYcvDwlXPj2QBWCth7DsyVzUXx9iFxsbdUM+4Ree+/2SbG6Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\AnimishP\\Project Folder\\github-clone-backend\\PersonalComputerFilesForProject\\EF-Tutorial.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AnimishP\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\AnimishP\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\AnimishP\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\AnimishP\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.9\\microsoft.aspnetcore.authentication.jwtbearer.7.0.9.nupkg.sha512",
+    "C:\\Users\\AnimishP\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.10\\microsoft.aspnetcore.authentication.jwtbearer.7.0.10.nupkg.sha512",
     "C:\\Users\\AnimishP\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\AnimishP\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\AnimishP\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.2.0\\microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",
@@ -64,6 +64,7 @@
     "C:\\Users\\AnimishP\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",
     "C:\\Users\\AnimishP\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.21.0\\system.identitymodel.tokens.jwt.6.21.0.nupkg.sha512",
     "C:\\Users\\AnimishP\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
+    "C:\\Users\\AnimishP\\.nuget\\packages\\system.json\\4.7.1\\system.json.4.7.1.nupkg.sha512",
     "C:\\Users\\AnimishP\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\AnimishP\\.nuget\\packages\\system.memory.data\\1.0.2\\system.memory.data.1.0.2.nupkg.sha512",
     "C:\\Users\\AnimishP\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",

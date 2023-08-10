@@ -14,6 +14,7 @@ builder.Services.AddControllers();
 // builder.Services.AddTransient<Seed>();
 builder.Services.AddScoped<IUser, UserRepository>();
 builder.Services.AddScoped<IPump, PumpRepository>();
+builder.Services.AddScoped<IJsondata, JsonDataRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

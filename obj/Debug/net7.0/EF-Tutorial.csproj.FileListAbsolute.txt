@@ -152,3 +152,6 @@ C:\Users\AnimishP\Project Folder\github-clone-backend\PersonalComputerFilesForPr
 C:\Users\AnimishP\Project Folder\github-clone-backend\PersonalComputerFilesForProject\obj\Debug\net7.0\EF-Tutorial.genruntimeconfig.cache
 C:\Users\AnimishP\Project Folder\github-clone-backend\PersonalComputerFilesForProject\obj\Debug\net7.0\ref\EF-Tutorial.dll
 C:\Users\AnimishP\Project Folder\github-clone-backend\PersonalComputerFilesForProject\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\AnimishP\Project Folder\github-clone-backend\PersonalComputerFilesForProject\bin\Debug\net7.0\Repository\TimeSeriesJson.json
+C:\Users\AnimishP\Project Folder\github-clone-backend\PersonalComputerFilesForProject\bin\Debug\net7.0\System.Json.dll
+C:\Users\AnimishP\Project Folder\github-clone-backend\PersonalComputerFilesForProject\bin\Debug\net7.0\Repository\TimeSeriesData.json

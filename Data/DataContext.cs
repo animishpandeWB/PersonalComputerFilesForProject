@@ -4,6 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using EF_Tutorial.Models;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Text.Json;
+// using EF_Tutorial.Models;
+using EF_Tutorial.Data;
+using EF_Tutorial.Interface;
 
 namespace EF_Tutorial.Data
 {
@@ -16,7 +21,8 @@ namespace EF_Tutorial.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Pump> Pumps { get; set; }
-        // public DbSet<PumpForecast> PumpForecasts {get; set;}
+        public DbSet<JsonData> JsonData { get; set; }
+        // public DbSet<PumpForecast> PumpForecasts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,7 +43,7 @@ namespace EF_Tutorial.Data
             //     .WithOne(p => p.Pump)
             //     .HasForeignKey(pu => pu.PumpId)
             //     .IsRequired();
-            
+
             // modelBuilder.Entity<PumpForecast>()
             //     .HasOne(e => e.Pump)
             //     .WithMany(e => e.PumpForecasts)
@@ -160,7 +166,21 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 }
             };
-
+            string jsonFile = File.ReadAllText(@"./Repository/TimeSeriesData.json");
+            var pumpForecastData = JsonSerializer.Deserialize<List<JsonData>>(jsonFile);
+            var addData = new List<JsonData>();
+            int jsonDataId = 1;
+            foreach(var item in pumpForecastData)
+            {
+                addData.Add(new JsonData {
+                    id = jsonDataId++,
+                    jsonId = item.id,
+                    date = item.date,
+                    value1 = item.value1,
+                    value2 = item.value2
+                });
+            }
+            
             // var PumpForecastList = new List<PumpForecast>() {
             //     new PumpForecast {
             //         Id = 1,
@@ -169,11 +189,16 @@ namespace EF_Tutorial.Data
             //         PumpId = 1
             //     }
             // };
-                        
 
-            
+
+
             modelBuilder.Entity<Pump>().HasData(PumpsList);
             modelBuilder.Entity<User>().HasData(UsersList);
+            foreach(var d in addData)
+            {
+                modelBuilder.Entity<JsonData>().HasData(d);
+            }
+            
             // modelBuilder.Entity<PumpForecast>().HasData(PumpForecastList); 
 
         }

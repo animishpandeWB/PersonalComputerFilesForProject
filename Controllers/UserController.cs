@@ -58,7 +58,7 @@ namespace EF_Tutorial.Controllers
             var userExistsCheck = _userInterface.GetUserById(userCreate.UserId);
             if(userExistsCheck != null) 
             {
-                ModelState.AddModelError("", "Owner already exists");
+                ModelState.AddModelError("", "User already exists");
                 return StatusCode(422, ModelState);
             }
             if (!ModelState.IsValid)
@@ -72,6 +72,21 @@ namespace EF_Tutorial.Controllers
             }
             
             return Ok("User successfully created");
+        }
+
+        [HttpPost]
+        [Route("checkUserPass")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult checkUserPass(int userId, string password)
+        {
+            if(password == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            bool verifyUserPass = _userInterface.CheckUserLogin(userId, password);
+            return Ok(verifyUserPass);
         }
     }
 }
