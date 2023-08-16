@@ -9,6 +9,7 @@ using EF_Tutorial.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
 using System.Security.Cryptography;
+using BCrypt.Net;
 
 namespace EF_Tutorial.Repository
 {
@@ -46,18 +47,18 @@ namespace EF_Tutorial.Repository
                         iterations,
                         hashAlgorithm,
                         keySize);
-            
+
             return Convert.ToBase64String(hash);
         }
 
-        private static bool VerifyPassword(string enteredPassword, string salt, string storedHashedPassword)
-        {
-            string hashedEnteredPassword = HashPassword(enteredPassword, salt);
-            string hashedEnteredPassword2 = HashPassword(enteredPassword, salt);
-            Console.WriteLine("hashedEntered: " + hashedEnteredPassword);
-            Console.WriteLine("storedhashed: " + hashedEnteredPassword2);
-            return string.Equals(hashedEnteredPassword, storedHashedPassword);
-        }
+        // private static bool VerifyPassword(string enteredPassword, string salt, string storedHashedPassword)
+        // {
+        //     string hashedEnteredPassword = HashPassword(enteredPassword, salt);
+        //     string hashedEnteredPassword2 = HashPassword(enteredPassword, salt);
+        //     Console.WriteLine("hashedEntered: " + hashedEnteredPassword);
+        //     Console.WriteLine("storedhashed: " + hashedEnteredPassword2);
+        //     return string.Equals(hashedEnteredPassword, storedHashedPassword);
+        // }
 
         // private string HashPassword(string password, byte[] salt)
         // {
@@ -69,31 +70,21 @@ namespace EF_Tutorial.Repository
         //                 iterations,
         //                 hashAlgorithm,
         //                 keySize);
-            
+
         //     return Convert.ToHexString(hash);
         // }
 
-        // private bool verifyPassword(string password, string hash)
-        // {
-        //     var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(
-        //                             Encoding.UTF8.GetBytes(hash),
-        //                             salt,
-        //                             iterations,
-        //                             hashAlgorithm,
-        //                             keySize);
-        //     var newHash = Convert.ToHexString(hashToCompare);
-        //     Console.WriteLine("newHash: " + newHash);
-
-        //     return string.Equals(newHash, hash);
-            
-
-        // }
+        private bool VerifyPassword(string enteredPassword, string userPassword)
+        {
+            bool isValidPassword = BCrypt.Net.BCrypt.Verify(enteredPassword, userPassword);
+            return isValidPassword;
+        }
 
         private readonly DataContext _dataContext;
         public UserRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
-            
+
         }
 
         public ICollection<User> GetUsers()
@@ -110,9 +101,12 @@ namespace EF_Tutorial.Repository
 
         public bool CreateUser(User user)
         {
-            if(user == null) {
+            if (user == null)
+            {
                 throw new ArgumentNullException("user is null");
             }
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            user.Password = hashedPassword;
             _dataContext.Add(user);
             return Save();
             // user.Id = _userId++;
@@ -139,16 +133,16 @@ namespace EF_Tutorial.Repository
         //     return checkPass;
         // }
 
-        public bool CheckUserLogin(int userId, string password) 
-        {
-            var user = GetUserById(userId);
-            var userPassword = user.Password;
-            // Console.WriteLine(userPassword);
-            bool checkUserPass = VerifyPassword(password, salt, userPassword);
-            Console.WriteLine(checkUserPass);
-            return checkUserPass;
-            // return true;
-        }
+        // public bool CheckUserLogin(int userId, string password)
+        // {
+        //     var user = GetUserById(userId);
+        //     var userPassword = user.Password;
+        //     // Console.WriteLine(userPassword);
+        //     bool checkUserPass = VerifyPassword(password, userPassword);
+        //     Console.WriteLine(checkUserPass);
+        //     return checkUserPass;
+        //     // return true;
+        // }
 
         public bool UserExists(int userId)
         {
@@ -160,7 +154,7 @@ namespace EF_Tutorial.Repository
             var saved = _dataContext.SaveChanges();
             return saved > 0 ? true : false;
         }
-        
+
         // public bool Save()
         // {
         //     var saved = _dataContext.SaveChanges();

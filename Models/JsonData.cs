@@ -11,12 +11,13 @@ namespace EF_Tutorial.Models
     public class JsonData
     {
         [Key]
-        public int id {get; set;}
-        public int jsonId {get; set;}
-        public string date {get; set;}
-        public int value1 {get; set;}
-        public int value2 {get; set;}
-
+        public int id { get; set; }
+        public int jsonId { get; set; }
+        public string date { get; set; }
+        public int value1 { get; set; }
+        public int value2 { get; set; }
+        // public int pumpId { get; set; }
+        // public Pump? Pump { get; set; }
 
     }
 }

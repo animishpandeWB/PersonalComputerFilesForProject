@@ -16,12 +16,13 @@ namespace EF_Tutorial.Repository
         private readonly DataContext _dataContext;
         int jsonDataId = 1;
 
-        public JsonDataRepository(DataContext dataContext) {
+        public JsonDataRepository(DataContext dataContext)
+        {
             _dataContext = dataContext;
         }
-        
 
-        public ICollection<JsonData> GetJsonData() 
+
+        public ICollection<JsonData> GetJsonData()
         {
             return _dataContext.JsonData.OrderBy(j => j.id).ToList();
         }
@@ -36,6 +37,6 @@ namespace EF_Tutorial.Repository
             var saved = _dataContext.SaveChanges();
             return saved > 0 ? true : false;
         }
-        
+
     }
 }

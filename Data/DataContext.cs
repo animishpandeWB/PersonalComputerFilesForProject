@@ -22,7 +22,6 @@ namespace EF_Tutorial.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Pump> Pumps { get; set; }
         public DbSet<JsonData> JsonData { get; set; }
-        // public DbSet<PumpForecast> PumpForecasts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,19 +38,27 @@ namespace EF_Tutorial.Data
                 .IsRequired();
 
             // modelBuilder.Entity<Pump>()
-            //     .HasMany(u => u.PumpForecasts)
+            //     .HasMany(j => j.JsonData)
             //     .WithOne(p => p.Pump)
-            //     .HasForeignKey(pu => pu.PumpId)
+            //     .HasForeignKey(p => p.pumpId)
             //     .IsRequired();
 
-            // modelBuilder.Entity<PumpForecast>()
-            //     .HasOne(e => e.Pump)
-            //     .WithMany(e => e.PumpForecasts)
-            //     .HasForeignKey(e => e.PumpId)
+            // modelBuilder.Entity<JsonData>()
+            //     .HasOne(p => p.Pump)
+            //     .WithMany(j => j.JsonData)
+            //     .HasForeignKey(p => p.pumpId)
             //     .IsRequired();
+
+
+            modelBuilder.Entity<User>()
+                .HasKey(x => new { x.Id });
+
+            modelBuilder.Entity<Pump>()
+                .HasKey(x => new { x.Id });
 
             var UsersList = new List<User>() {
                     new User {
+                        Id = 1,
                         UserId = 1,
                         Username = "test1",
                         Email = "test1@123.com",
@@ -61,6 +68,7 @@ namespace EF_Tutorial.Data
 
             var PumpsList = new List<Pump>() {
                 new Pump {
+                    Id = 1,
                     PumpId = 1,
                     Name = "Pump 1",
                     Type = "Centrifugal Pump",
@@ -68,6 +76,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 2,
                     PumpId = 2,
                     Name = "Pump 2",
                     Type = "Jet Pump",
@@ -75,6 +84,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 3,
                     PumpId = 3,
                     Name = "Pump 3",
                     Type = "Piston Pump",
@@ -82,6 +92,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 4,
                     PumpId = 4,
                     Name = "Pump 4",
                     Type = "Centrifugal Pump",
@@ -89,6 +100,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 5,
                     PumpId = 5,
                     Name = "Pump 5",
                     Type = "Jet Pump",
@@ -96,6 +108,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 6,
                     PumpId = 6,
                     Name = "Pump 6",
                     Type = "Jet Pump",
@@ -103,6 +116,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 7,
                     PumpId = 7,
                     Name = "Pump 7",
                     Type = "Piston Pump",
@@ -110,6 +124,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 8,
                     PumpId = 8,
                     Name = "Pump 8",
                     Type = "Piston Pump",
@@ -117,6 +132,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 9,
                     PumpId = 9,
                     Name = "Pump 9",
                     Type = "Centrifugal Pump",
@@ -124,6 +140,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 10,
                     PumpId = 10,
                     Name = "Pump 10",
                     Type = "Jet Pump",
@@ -131,6 +148,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 11,
                     PumpId = 11,
                     Name = "Pump 11",
                     Type = "Jet Pump",
@@ -138,6 +156,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 12,
                     PumpId = 12,
                     Name = "Pump 12",
                     Type = "Centrifugal Pump",
@@ -145,6 +164,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 13,
                     PumpId = 13,
                     Name = "Pump 13",
                     Type = "Piston Pump",
@@ -152,6 +172,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 14,
                     PumpId = 14,
                     Name = "Pump 14",
                     Type = "Piston Pump",
@@ -159,6 +180,7 @@ namespace EF_Tutorial.Data
                     UserId = 1
                 },
                 new Pump {
+                    Id = 15,
                     PumpId = 15,
                     Name = "Pump 15",
                     Type = "Centrifugal Pump",
@@ -170,9 +192,10 @@ namespace EF_Tutorial.Data
             var pumpForecastData = JsonSerializer.Deserialize<List<JsonData>>(jsonFile);
             var addData = new List<JsonData>();
             int jsonDataId = 1;
-            foreach(var item in pumpForecastData)
+            foreach (var item in pumpForecastData)
             {
-                addData.Add(new JsonData {
+                addData.Add(new JsonData
+                {
                     id = jsonDataId++,
                     jsonId = item.id,
                     date = item.date,
@@ -180,26 +203,16 @@ namespace EF_Tutorial.Data
                     value2 = item.value2
                 });
             }
-            
-            // var PumpForecastList = new List<PumpForecast>() {
-            //     new PumpForecast {
-            //         Id = 1,
-            //         Day = "2022-04-01",
-            //         Forecast = 101,
-            //         PumpId = 1
-            //     }
-            // };
 
 
 
             modelBuilder.Entity<Pump>().HasData(PumpsList);
             modelBuilder.Entity<User>().HasData(UsersList);
-            foreach(var d in addData)
+            foreach (var d in addData)
             {
                 modelBuilder.Entity<JsonData>().HasData(d);
             }
-            
-            // modelBuilder.Entity<PumpForecast>().HasData(PumpForecastList); 
+
 
         }
     }

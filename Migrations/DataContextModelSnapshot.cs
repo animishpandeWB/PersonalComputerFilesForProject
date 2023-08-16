@@ -16,7 +16,7 @@ namespace EF_Tutorial.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.9")
+                .HasAnnotation("ProductVersion", "7.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -891,15 +891,18 @@ namespace EF_Tutorial.Migrations
 
             modelBuilder.Entity("EF_Tutorial.Models.Pump", b =>
                 {
-                    b.Property<int>("PumpId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PumpId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PumpId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
@@ -911,7 +914,7 @@ namespace EF_Tutorial.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("PumpId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
@@ -920,158 +923,148 @@ namespace EF_Tutorial.Migrations
                     b.HasData(
                         new
                         {
-                            PumpId = 1,
+                            Id = 1,
                             Name = "Pump 1",
+                            PumpId = 1,
                             Status = true,
                             Type = "Centrifugal Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 2,
+                            Id = 2,
                             Name = "Pump 2",
+                            PumpId = 2,
                             Status = false,
                             Type = "Jet Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 3,
+                            Id = 3,
                             Name = "Pump 3",
+                            PumpId = 3,
                             Status = false,
                             Type = "Piston Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 4,
+                            Id = 4,
                             Name = "Pump 4",
+                            PumpId = 4,
                             Status = false,
                             Type = "Centrifugal Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 5,
+                            Id = 5,
                             Name = "Pump 5",
+                            PumpId = 5,
                             Status = true,
                             Type = "Jet Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 6,
+                            Id = 6,
                             Name = "Pump 6",
+                            PumpId = 6,
                             Status = true,
                             Type = "Jet Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 7,
+                            Id = 7,
                             Name = "Pump 7",
+                            PumpId = 7,
                             Status = false,
                             Type = "Piston Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 8,
+                            Id = 8,
                             Name = "Pump 8",
+                            PumpId = 8,
                             Status = true,
                             Type = "Piston Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 9,
+                            Id = 9,
                             Name = "Pump 9",
+                            PumpId = 9,
                             Status = false,
                             Type = "Centrifugal Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 10,
+                            Id = 10,
                             Name = "Pump 10",
+                            PumpId = 10,
                             Status = true,
                             Type = "Jet Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 11,
+                            Id = 11,
                             Name = "Pump 11",
+                            PumpId = 11,
                             Status = false,
                             Type = "Jet Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 12,
+                            Id = 12,
                             Name = "Pump 12",
+                            PumpId = 12,
                             Status = true,
                             Type = "Centrifugal Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 13,
+                            Id = 13,
                             Name = "Pump 13",
+                            PumpId = 13,
                             Status = true,
                             Type = "Piston Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 14,
+                            Id = 14,
                             Name = "Pump 14",
+                            PumpId = 14,
                             Status = false,
                             Type = "Piston Pump",
                             UserId = 1
                         },
                         new
                         {
-                            PumpId = 15,
+                            Id = 15,
                             Name = "Pump 15",
+                            PumpId = 15,
                             Status = true,
                             Type = "Centrifugal Pump",
                             UserId = 1
                         });
                 });
 
-            modelBuilder.Entity("EF_Tutorial.Models.PumpForecast", b =>
+            modelBuilder.Entity("EF_Tutorial.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Day")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Forecast")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PumpId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PumpId");
-
-                    b.ToTable("PumpForecast");
-                });
-
-            modelBuilder.Entity("EF_Tutorial.Models.User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -1081,20 +1074,24 @@ namespace EF_Tutorial.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
-                            UserId = 1,
+                            Id = 1,
                             Email = "test1@123.com",
                             Password = "test1",
+                            UserId = 1,
                             Username = "test1"
                         });
                 });
@@ -1108,22 +1105,6 @@ namespace EF_Tutorial.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EF_Tutorial.Models.PumpForecast", b =>
-                {
-                    b.HasOne("EF_Tutorial.Models.Pump", "Pump")
-                        .WithMany("PumpForecasts")
-                        .HasForeignKey("PumpId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pump");
-                });
-
-            modelBuilder.Entity("EF_Tutorial.Models.Pump", b =>
-                {
-                    b.Navigation("PumpForecasts");
                 });
 
             modelBuilder.Entity("EF_Tutorial.Models.User", b =>

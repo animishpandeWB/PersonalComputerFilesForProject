@@ -1,3 +1,5 @@
+// using Internal;
+// using Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +41,7 @@ namespace EF_Tutorial.Controllers
 
             var user = _userInterface.GetUserById(id);
 
-             if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             return Ok(user);
@@ -50,43 +52,45 @@ namespace EF_Tutorial.Controllers
         [ProducesResponseType(400)]
         public IActionResult CreateUser([FromBody] User userCreate)
         {
-            if(userCreate == null)
+            if (userCreate == null)
             {
                 return BadRequest(ModelState);
             }
 
             var userExistsCheck = _userInterface.GetUserById(userCreate.UserId);
-            if(userExistsCheck != null) 
+            if (userExistsCheck != null)
             {
                 ModelState.AddModelError("", "User already exists");
                 return StatusCode(422, ModelState);
             }
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-           
+
             // userCreate = _userInterface.CreateUser(userCreate);
             if (!_userInterface.CreateUser(userCreate))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);
             }
-            
+
             return Ok("User successfully created");
         }
 
-        [HttpPost]
-        [Route("checkUserPass")]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        public IActionResult checkUserPass(int userId, string password)
-        {
-            if(password == null)
-            {
-                return BadRequest(ModelState);
-            }
+        // [HttpPost]
+        // [Route("checkUserPass")]
+        // [ProducesResponseType(204)]
+        // [ProducesResponseType(400)]
+        // public IActionResult checkUserPass(int userId, string password)
+        // {
+        //     Console.WriteLine("ABC");
+        //     Console.WriteLine(password);
+        //     if (password == null)
+        //     {
+        //         return BadRequest(ModelState);
+        //     }
 
-            bool verifyUserPass = _userInterface.CheckUserLogin(userId, password);
-            return Ok(verifyUserPass);
-        }
+        //     bool verifyUserPass = _userInterface.CheckUserLogin(userId, password);
+        //     return Ok(verifyUserPass);
+        // }
     }
 }

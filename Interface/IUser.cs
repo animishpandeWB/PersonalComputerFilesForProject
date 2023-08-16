@@ -12,7 +12,7 @@ namespace EF_Tutorial.Interface
         User GetUserById(int id);
         bool CreateUser(User user);
         bool UserExists(int userId);
-        bool CheckUserLogin(int userId, string password);
+        // bool CheckUserLogin(int userId, string password);
         bool Save();
     }
 }
