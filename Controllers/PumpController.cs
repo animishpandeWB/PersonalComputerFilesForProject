@@ -85,5 +85,25 @@ namespace EF_Tutorial.Controllers
             }
             return Ok("Pump deleted successfully");
         }
+
+        [HttpPut]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdatePump([FromBody] Pump pump)
+        {
+            if(_pumpRepository.GetPumpByPumpId(pump.PumpId) == null)
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid)
+                return BadRequest();
+            if(!_pumpRepository.UpdatePump(pump))
+            {
+                ModelState.AddModelError("", "Something went wrong updating pump");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Successfully updated pump");
+        }
     }
 }

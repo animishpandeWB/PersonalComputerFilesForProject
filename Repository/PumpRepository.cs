@@ -77,6 +77,17 @@ namespace EF_Tutorial.Repository
             return Save();
         }
 
+        public bool UpdatePump(Pump pump)
+        {
+            if(pump == null)
+            {
+                throw new ArgumentNullException("Pump is null");
+            }
+            _dataContext.ChangeTracker.Clear();
+            _dataContext.Update(pump);
+            return Save();
+        }
+
         public bool Save()
         {
             var saved = _dataContext.SaveChanges();

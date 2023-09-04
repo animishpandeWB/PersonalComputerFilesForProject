@@ -13,6 +13,7 @@ namespace EF_Tutorial.Interface
         Pump GetPumpByPumpId(int pumpId);
         bool AddPump(Pump pump);
         bool DeletePump(int pumpId);
+        bool UpdatePump(Pump pump);
         bool Save();
     }
 }

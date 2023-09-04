@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AnimishP\\Project Folder\\github-clone-backend\\PersonalComputerFilesForProject\\EF-Tutorial.csproj": {}
+    "D:\\Dotnet Project\\Wonderbiz Project Folder\\PersonalComputerFilesForProject\\EF-Tutorial.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AnimishP\\Project Folder\\github-clone-backend\\PersonalComputerFilesForProject\\EF-Tutorial.csproj": {
+    "D:\\Dotnet Project\\Wonderbiz Project Folder\\PersonalComputerFilesForProject\\EF-Tutorial.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AnimishP\\Project Folder\\github-clone-backend\\PersonalComputerFilesForProject\\EF-Tutorial.csproj",
+        "projectUniqueName": "D:\\Dotnet Project\\Wonderbiz Project Folder\\PersonalComputerFilesForProject\\EF-Tutorial.csproj",
         "projectName": "EF-Tutorial",
-        "projectPath": "C:\\Users\\AnimishP\\Project Folder\\github-clone-backend\\PersonalComputerFilesForProject\\EF-Tutorial.csproj",
-        "packagesPath": "C:\\Users\\AnimishP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AnimishP\\Project Folder\\github-clone-backend\\PersonalComputerFilesForProject\\obj\\",
+        "projectPath": "D:\\Dotnet Project\\Wonderbiz Project Folder\\PersonalComputerFilesForProject\\EF-Tutorial.csproj",
+        "packagesPath": "C:\\Users\\Animish\\.nuget\\packages\\",
+        "outputPath": "D:\\Dotnet Project\\Wonderbiz Project Folder\\PersonalComputerFilesForProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\AnimishP\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Animish\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -75,6 +73,10 @@
               "target": "Package",
               "version": "[7.0.9, )"
             },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.20.69, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -82,6 +84,30 @@
             "System.Json": {
               "target": "Package",
               "version": "[4.7.1, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "xunit.analyzers": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "xunit.core": {
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "xunit.runner.console": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.5.0, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.5.0, )"
             }
           },
           "imports": [
